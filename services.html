@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>خدماتنا | Services | الشموخ</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800;900&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css"/>
+<style>
+
+  /* Typewriter Cursor */
+.tw-cursor {
+  display: inline-block;
+  color: var(--az);
+  font-weight: 300;
+  font-size: 1.1em;
+  margin-right: 2px;
+  animation: blink 1s step-end infinite;
+}
+html.ltr .tw-cursor {
+  margin-right: 0;
+  margin-left: 2px;
+}
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+/* Why Us Cards — Mobile Carousel */
+@media(max-width:800px){
+  .why-cards {
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    display: flex;
+    gap: 16px;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none; /* Firefox */
+    padding-bottom: 8px;
+  }
+  .why-cards::-webkit-scrollbar {
+    display: none; /* Chrome/Safari */
+  }
+  .why-cards .card {
+    flex: 0 0 85%;
+    scroll-snap-align: center;
+    margin-bottom: 0;
+  }
+}
+
+/* Booking Floating Button */
+#booking-btn {
+  position: fixed;
+  bottom: 90px;
+  right: 26px;
+  background: var(--az2);
+  color: #fff;
+  padding: 10px 18px;
+  border-radius: 25px;
+  font-size: 12px;
+  font-weight: 700;
+  box-shadow: 0 4px 16px rgba(51,136,187,.35);
+  z-index: 998;
+  text-decoration: none;
+  font-family: inherit;
+  transition: all .25s;
+  white-space: nowrap;
+}
+#booking-btn:hover {
+  background: var(--az3);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 22px rgba(51,136,187,.45);
+}
+html.ltr #booking-btn {
+  right: auto;
+  left: 26px;
+}
+@media(max-width:800px){
+  #booking-btn {
+    bottom: 86px;
+    right: 20px;
+    padding: 9px 14px;
+    font-size: 11px;
+  }
+  html.ltr #booking-btn {
+    right: auto;
+    left: 20px;
+  }
+}
+
+/* Dark Mode */
+html.dark {
+  --sky: #0f1a25;
+  --sky2: #152535;
+  --w: #1a2634;
+  --az: #6bb8e0;
+  --az2: #4a9ec9;
+  --az3: #2d7aa8;
+  --azp: #1a3a4d;
+  --dk: #0d1218;
+  --tx: #e8f4fc;
+  --txl: #8ab4c7;
+  --bd: #2a4a5e;
+  --bd2: #1e3a4d;
+}
+html.dark .tw-cursor { color: var(--az); }
+html.dark #booking-btn { background: var(--az2); }
+html.dark .card, html.dark .srv, html.dark .pc, html.dark .vm, html.dark .fqi, html.dark .ci {
+  background: var(--w);
+  border-color: var(--bd2);
+}
+html.dark .srv::after { background: linear-gradient(to right, var(--az3), var(--az)); }
+html.dark .pcbadge { background: var(--az2); }
+html.dark .btn-wh { background: var(--tx); color: var(--az3); }
+html.dark footer { background: #0a1018; }
+html.dark .fsky path { fill: rgba(90,170,212,0.04); stroke: rgba(90,170,212,0.08); }
+
+/* Dark Mode Toggle Button */
+#dm {
+  background: var(--sky);
+  border: 1.5px solid var(--bd);
+  border-radius: 8px;
+  padding: 6px 10px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all .2s;
+  line-height: 1;
+}
+#dm:hover {
+  background: var(--azp);
+  transform: scale(1.1);
+}
+html.dark #dm {
+  background: var(--azp);
+  border-color: var(--az);
+}
+
+/* WhatsApp Copy Button */
+.wab-copy {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--w);
+  border: 2px solid var(--bd);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 16px;
+  transition: all .2s;
+  box-shadow: 0 2px 10px rgba(0,0,0,.1);
+}
+.wab-copy:hover {
+  background: var(--azp);
+  border-color: var(--az);
+  transform: scale(1.1);
+}
+html.dark .wab-copy {
+  background: var(--w);
+  border-color: var(--bd2);
+}
+
+/* Ripple Effect */
+.btn, .wab, .srv, .card, .pc, .nc {
+  position: relative;
+  overflow: hidden;
+}
+.ripple {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.35);
+  transform: scale(0);
+  animation: ripple-anim 0.6s linear;
+  pointer-events: none;
+}
+@keyframes ripple-anim {
+  to { transform: scale(4); opacity: 0; }
+}
+
+/* Skeleton Loading */
+.skeleton {
+  background: linear-gradient(90deg, var(--bd2) 25%, var(--sky) 50%, var(--bd2) 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}
+@keyframes shimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+html.dark .skeleton {
+  background: linear-gradient(90deg, var(--bd2) 25%, #1a2634 50%, var(--bd2) 75%);
+  background-size: 200% 100%;
+}
+
+/* Font display swap to prevent FOIT */
+@font-face {
+  font-family: 'Cairo';
+  font-display: swap;
+  src: local('Cairo');
+}
+@font-face {
+  font-family: 'Inter';
+  font-display: swap;
+  src: local('Inter');
+}
+
+/* Minimal additions - only what's not in style.css */
+.pod-hero{min-height:50vh;background:linear-gradient(rgba(240,247,253,0.9),rgba(218,238,249,0.9)),url('ss.png');background-size:cover;background-position:center;display:flex;align-items:center;position:relative;overflow:hidden}
+.pod-hero .si{text-align:center;padding-top:120px;padding-bottom:60px;position:relative;z-index:1}
+.pod-hero h1{font-size:clamp(32px,4.5vw,58px);font-weight:900;color:var(--tx);margin-bottom:16px;line-height:1.15}
+.pod-hero h1 em{font-style:normal;color:var(--az)}
+.pod-hero p{color:var(--txl);font-size:16px;max-width:620px;margin:0 auto 28px;line-height:1.9}
+
+/* YouTube Video Container */
+.yt-wrap{position:relative;padding-bottom:56.25%;height:0;overflow:hidden;border-radius:16px;background:var(--sky2);border:1.5px solid var(--bd2)}
+.yt-wrap iframe{position:absolute;top:0;left:0;width:100%;height:100%;border:none;border-radius:16px}
+
+/* Episode card with video */
+.ep-card{background:var(--w);border:1.5px solid var(--bd2);border-radius:16px;overflow:hidden;transition:all .35s;box-shadow:0 2px 12px rgba(90,170,212,.06)}
+.ep-card:hover{border-color:var(--az);transform:translateY(-5px);box-shadow:0 16px 40px rgba(90,170,212,.15)}
+.ep-card .yt-wrap{border-radius:0;border:none;border-bottom:1.5px solid var(--bd2)}
+.ep-card .yt-wrap iframe{border-radius:0}
+.ep-body{padding:22px}
+.ep-body h4{font-size:15px;font-weight:800;color:var(--tx);margin-bottom:8px;line-height:1.5}
+.ep-body p{color:var(--txl);font-size:13px;line-height:1.8;margin-bottom:14px}
+.ep-meta{display:flex;gap:18px;flex-wrap:wrap;margin-bottom:16px}
+.ep-meta span{font-size:12px;color:var(--txl);font-weight:600;display:flex;align-items:center;gap:5px}
+.ep-tags{display:flex;gap:6px;flex-wrap:wrap}
+.ep-tag{font-size:11px;background:var(--azp);color:var(--az2);padding:4px 12px;border-radius:10px;font-weight:700}
+
+/* Featured episode */
+.ep-feat{background:var(--w);border:2px solid var(--bd2);border-radius:20px;overflow:hidden;box-shadow:0 8px 40px rgba(90,170,212,.1)}
+.ep-feat .yt-wrap{border-radius:0;border:none}
+.ep-feat-body{padding:32px}
+.ep-feat-body h3{font-size:20px;font-weight:900;color:var(--tx);margin-bottom:12px;line-height:1.4}
+.ep-feat-body p{color:var(--txl);font-size:14px;line-height:1.9;margin-bottom:18px}
+
+/* Subscribe section */
+.pod-sub{background:linear-gradient(135deg,var(--az3),var(--az2));padding:64px 44px;position:relative;overflow:hidden}
+.pod-sub .si{text-align:center;position:relative;z-index:1}
+.pod-sub h2{color:#fff;font-size:clamp(24px,3vw,36px);font-weight:900;margin-bottom:14px}
+.pod-sub p{color:rgba(255,255,255,.85);font-size:15px;max-width:520px;margin:0 auto 28px;line-height:1.8}
+.pod-plats{display:flex;justify-content:center;gap:12px;flex-wrap:wrap}
+.pod-plat{background:rgba(255,255,255,.12);border:1.5px solid rgba(255,255,255,.2);border-radius:12px;padding:14px 22px;display:flex;align-items:center;gap:10px;color:#fff;text-decoration:none;transition:all .25s;font-size:14px;font-weight:700}
+.pod-plat:hover{background:rgba(255,255,255,.25);transform:translateY(-3px)}
+
+/* Responsive */
+@media(max-width:800px){
+  .ep-feat-body{padding:22px}
+  .ep-feat-body h3{font-size:17px}
+  .pod-sub{padding:44px 20px}
+}
+</style>
+</head>
+<body>
+<div id="pgb"></div>
+<button id="btt" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+<div id="wa">
+<a href="https://wa.me/+97466717222" target="_blank" class="wab">
+  <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</a>
+<button class="wab-copy" onclick="copyPhone()" title="نسخ الرقم">📋</button>
+
+<span class="wat"><span class="ar">تواصل عبر واتساب 💬</span><span class="en" style="display:none">Chat on WhatsApp 💬</span></span>
+</div>
+
+<div id="toast" style="position:fixed;bottom:140px;right:26px;background:var(--az2);color:#fff;padding:10px 18px;border-radius:10px;font-size:13px;font-weight:700;opacity:0;transform:translateY(10px);transition:all .3s;z-index:999;pointer-events:none;"><span class="ar">✅ تم نسخ الرقم</span><span class="en" style="display:none">✅ Number copied</span></div>
+<a href="contact.html" id="booking-btn"><span class="ar">📅 احجز استشارة مجانية</span><span class="en" style="display:none">📅 Book Free Consultation</span></a>
+
+
+<header id="hdr">
+<div class="navi">
+  <a href="index.html"><img src="logo.png" alt="الشموخ" style="height:90px;width:auto;object-fit:contain"/></a>
+  <nav><ul class="nul">
+    <li><a href="index.html"><span class="ar">الرئيسية</span><span class="en" style="display:none">Home</span></a></li>
+    <li><a href="about.html"><span class="ar">من نحن</span><span class="en" style="display:none">About</span></a></li>
+        <li><a href="gallery.html" class="act"><span class="ar">المعرض</span><span class="en" style="display:none">Gallery</span></a></li>
+
+    <!-- <li><a href="services.html"><span class="ar">خدماتنا</span><span class="en" style="display:none">Services</span></a></li> -->
+    <li><a href="portfolio.html"><span class="ar">أعمالنا</span><span class="en" style="display:none">Portfolio</span></a></li>
+        <li><a href="podcast.html" class="act"><span class="ar">البودكاست</span><span class="en" style="display:none">Podcast</span></a></li>
+
+    <li><a href="faq.html"><span class="ar">الأسئلة الشائعة</span><span class="en" style="display:none">FAQ</span></a></li>
+    <li><a href="why.html"><span class="ar">لماذا نحن</span><span class="en" style="display:none">Why Us</span></a></li>
+    <li><a href="contact.html"><span class="ar">تواصل معنا</span><span class="en" style="display:none">Contact</span></a></li>
+  </ul></nav>
+  <div class="navr">
+    <div class="lt"><button class="a" id="ba" onclick="setL('ar')">ع</button><button id="be" onclick="setL('en')">EN</button></div>
+    <button id="dm" onclick="toggleDM()" title="Dark Mode">🌙</button>
+    <a href="supervision.html" class="nc nc-az">🔍 <span class="ar">الإشراف الهندسي</span><span class="en" style="display:none">Supervision</span></a>
+    <a href="design.html" class="nc nc-out">🏛️ <span class="ar">التصميم المعماري</span><span class="en" style="display:none">Arch. Design</span></a>
+  </div>
+      <div class="hbg" id="hbg" onclick="tmob()"><span></span><span></span><span></span></div>
+
+</div>
+<div class="mobn" id="mobn">
+  <a href="index.html"><span class="ar">🏠 الرئيسية</span><span class="en" style="display:none">🏠 Home</span></a>
+  <a href="about.html"><span class="ar">👥 من نحن</span><span class="en" style="display:none">👥 About</span></a>
+  
+  <!-- <a href="services.html"><span class="ar">🛠️ خدماتنا</span><span class="en" style="display:none">🛠️ Services</span></a> -->
+  <a href="portfolio.html"><span class="ar">🏗️ أعمالنا</span><span class="en" style="display:none">🏗️ Portfolio</span></a>
+    <a href="podcast.html"><span class="ar">🎙️ البودكاست</span><span class="en" style="display:none">🎙️ Podcast</span></a>
+
+  <a href="faq.html"><span class="ar">❓ الأسئلة الشائعة</span><span class="en" style="display:none">❓ FAQ</span></a>
+  <a href="why.html"><span class="ar">⭐ لماذا نحن</span><span class="en" style="display:none">⭐ Why Us</span></a>
+  <a href="contact.html"><span class="ar">📞 تواصل معنا</span><span class="en" style="display:none">📞 Contact</span></a>
+  <a href="supervision.html"><span class="ar">🔍 الإشراف الهندسي</span><span class="en" style="display:none">🔍 Supervision</span></a>
+  <a href="design.html"><span class="ar">🏛️ التصميم المعماري</span><span class="en" style="display:none">🏛️ Arch. Design</span></a>
+</div>
+</header>
+<div style="margin-top:70px"></div>
+<div style="background:linear-gradient(135deg,#18222e 0%,#243447 100%);padding:80px 44px 60px;position:relative;overflow:hidden">
+  <svg style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:0" viewBox="0 0 1340 280" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+<defs><pattern id="phg" width="50" height="50" patternUnits="userSpaceOnUse"><path d="M50 0L0 0 0 50" fill="none" stroke="rgba(90,170,212,0.07)" stroke-width=".7"/><circle cx="0" cy="0" r="1" fill="rgba(90,170,212,0.09)"/></pattern></defs>
+<rect width="100%" height="100%" fill="url(#phg)"/>
+<g transform="translate(1098,18)" opacity=".13" stroke="#5aaad4" fill="none"><polygon points="0,185 185,185 0,0" stroke-width="1.5"/><line x1="0" y1="46" x2="46" y2="46" stroke-width=".7"/><line x1="0" y1="92" x2="92" y2="92" stroke-width=".7"/><line x1="0" y1="138" x2="138" y2="138" stroke-width=".7"/><path d="M0,167 L18,167 L18,185" stroke-width="1.2"/></g><g transform="translate(38,28)"><g opacity=".15">
+<circle cx="84" cy="84" r="76" fill="none" stroke="#5aaad4" stroke-width="1.3"/>
+<circle cx="84" cy="84" r="60" fill="none" stroke="#5aaad4" stroke-width=".7" stroke-dasharray="3,4"/>
+<polygon points="84,10 87.5,84 84,76 80.5,84" fill="rgba(90,170,212,0.68)" stroke="none"/>
+<polygon points="84,158 87.5,84 84,92 80.5,84" fill="rgba(90,170,212,0.25)" stroke="none"/>
+<circle cx="84" cy="84" r="7" fill="rgba(90,170,212,0.4)" stroke="#5aaad4" stroke-width=".8"/>
+<circle cx="84" cy="84" r="2.5" fill="#5aaad4"/>
+</g></g></svg>
+  <div style="max-width:1340px;margin:0 auto;position:relative;z-index:1">
+    <div class="ar" style="display:flex;align-items:center;gap:8px;font-size:13px;color:rgba(255,255,255,.45);margin-bottom:16px;flex-wrap:wrap"><a href="index.html" style="color:#5aaad4;text-decoration:none"><span class="ar">الرئيسية</span><span class="en" style="display:none">Home</span></a><span style="color:rgba(255,255,255,.25)">/</span><span class="ar">خدماتنا</span><span class="en" style="display:none">Services</span></div>
+    <div class="en" style="display:none;align-items:center;gap:8px;font-size:13px;color:rgba(255,255,255,.45);margin-bottom:16px;flex-wrap:wrap"><a href="index.html" style="color:#5aaad4;text-decoration:none"><span class="ar">Home</span><span class="en" style="display:none">Home</span></a><span style="color:rgba(255,255,255,.25)">/</span><span class="ar">Services</span><span class="en" style="display:none">Services</span></div>
+    <h1 style="font-size:clamp(26px,3vw,44px);font-weight:900;color:#fff;margin-bottom:10px"><span class="ar">خدماتنا الهندسية</span><span class="en" style="display:none">Our Engineering Services</span></h1>
+    <p style="color:rgba(255,255,255,.55);font-size:15px;max-width:560px;line-height:1.9"><span class="ar">حزمة شاملة تغطي دورة حياة المشروع بالكامل</span><span class="en" style="display:none">A comprehensive package covering the entire project lifecycle</span></p>
+  </div>
+</div><section style="background:var(--sky);padding:64px 44px;position:relative;overflow:hidden">
+  <svg style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:0" viewBox="0 0 1340 700" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg"><defs><pattern id="sv" width="50" height="50" patternUnits="userSpaceOnUse"><path d="M50 0L0 0 0 50" fill="none" stroke="rgba(90,170,212,0.06)" stroke-width=".8"/><circle cx="25" cy="25" r="1" fill="rgba(90,170,212,0.08)"/></pattern></defs><rect width="100%" height="100%" fill="url(#sv)"/><g transform="translate(1092,16)" opacity=".1" stroke="#5aaad4" stroke-width="1" fill="none"><polygon points="40,0 80,22 80,66 40,88 0,66 0,22"/><polygon points="120,0 160,22 160,66 120,88 80,66 80,22"/><polygon points="80,66 120,88 120,132 80,154 40,132 40,88"/></g></svg>
+  <div class="si"><div class="g3"><a href="design.html" class="srv" style="text-decoration:none;display:block"><div class="srv-ico">🏛️</div><h4><span class="ar">التصاميم المعمارية</span><span class="en" style="display:none">Architectural Designs</span></h4><p><span class="ar">من القصور والفلل الفاخرة إلى الأبراج والمجمعات.</span><span class="en" style="display:none">From luxury palaces and villas to towers and commercial complexes.</span></p><div style="margin-top:14px"><span class="btn btn-out" style="font-size:12px;padding:8px 16px;display:inline-flex"><span class="ar">تفاصيل الخدمة ←</span><span class="en" style="display:none">Service Details →</span></span></div></a><a href="design.html" class="srv" style="text-decoration:none;display:block"><div class="srv-ico">🛋️</div><h4><span class="ar">التصميم الداخلي</span><span class="en" style="display:none">Interior Design</span></h4><p><span class="ar">فضاءات تدمج الرفاهية والوظيفية بأساليب مودرن وكلاسيك.</span><span class="en" style="display:none">Spaces blending luxury and functionality in modern and classic styles.</span></p><div style="margin-top:14px"><span class="btn btn-out" style="font-size:12px;padding:8px 16px;display:inline-flex"><span class="ar">تفاصيل الخدمة ←</span><span class="en" style="display:none">Service Details →</span></span></div></a><a href="contact.html" class="srv" style="text-decoration:none;display:block"><div class="srv-ico">🏭</div><h4><span class="ar">المشاريع الصناعية</span><span class="en" style="display:none">Industrial Projects</span></h4><p><span class="ar">تصميم المستودعات والمصانع بأعلى كفاءة تشغيلية.</span><span class="en" style="display:none">Designing warehouses and factories with maximum operational efficiency.</span></p><div style="margin-top:14px"><span class="btn btn-out" style="font-size:12px;padding:8px 16px;display:inline-flex"><span class="ar">تفاصيل الخدمة ←</span><span class="en" style="display:none">Service Details →</span></span></div></a><a href="contact.html" class="srv" style="text-decoration:none;display:block"><div class="srv-ico">🚒</div><h4><span class="ar">نظم الأمن والسلامة</span><span class="en" style="display:none">Security & Safety</span></h4><p><span class="ar">إعداد مخططات الدفاع المدني وتأمين المنشآت.</span><span class="en" style="display:none">Preparing civil defense plans and securing facilities.</span></p><div style="margin-top:14px"><span class="btn btn-out" style="font-size:12px;padding:8px 16px;display:inline-flex"><span class="ar">تفاصيل الخدمة ←</span><span class="en" style="display:none">Service Details →</span></span></div></a><a href="supervision.html" class="srv" style="text-decoration:none;display:block"><div class="srv-ico">🔍</div><h4><span class="ar">الإشراف الهندسي</span><span class="en" style="display:none">Engineering Supervision</span></h4><p><span class="ar">ضمان دقة التنفيذ ومطابقة المواصفات وأعلى معايير الجودة.</span><span class="en" style="display:none">Ensuring precise execution, spec compliance, and highest quality standards.</span></p><div style="margin-top:14px"><span class="btn btn-out" style="font-size:12px;padding:8px 16px;display:inline-flex"><span class="ar">تفاصيل الخدمة ←</span><span class="en" style="display:none">Service Details →</span></span></div></a><a href="contact.html" class="srv" style="text-decoration:none;display:block"><div class="srv-ico">📐</div><h4><span class="ar">تطوير وتعديل المخططات</span><span class="en" style="display:none">Plan Development</span></h4><p><span class="ar">إعادة هيكلة المساحات القائمة لأفضل استغلال ممكن.</span><span class="en" style="display:none">Restructuring existing spaces for optimal utilization.</span></p><div style="margin-top:14px"><span class="btn btn-out" style="font-size:12px;padding:8px 16px;display:inline-flex"><span class="ar">تفاصيل الخدمة ←</span><span class="en" style="display:none">Service Details →</span></span></div></a></div></div>
+</section>
+<footer>
+<svg class="fsky" viewBox="0 0 1340 120" preserveAspectRatio="xMidYMax meet" xmlns="http://www.w3.org/2000/svg">
+  <path d="M0,120 L0,96 L30,96 L30,78 L50,78 L50,62 L64,62 L64,78 L84,78 L84,90 L108,90 L108,50 L118,50 L118,34 L128,34 L128,20 L138,20 L138,10 L148,10 L148,4 L158,4 L158,10 L168,10 L168,20 L178,20 L178,34 L188,34 L188,50 L206,50 L206,68 L226,68 L226,52 L246,52 L246,36 L256,36 L256,20 L270,20 L270,8 L280,8 L280,20 L290,20 L290,36 L304,36 L304,52 L324,52 L324,68 L348,68 L348,84 L378,84 L378,64 L398,64 L398,46 L418,46 L418,34 L438,34 L438,46 L458,46 L458,64 L478,64 L478,80 L498,80 L498,64 L518,64 L518,46 L538,46 L538,30 L558,30 L558,16 L576,16 L576,4 L592,4 L592,16 L608,16 L608,30 L628,30 L628,46 L648,46 L648,62 L668,62 L668,78 L686,78 L686,62 L706,62 L706,46 L726,46 L726,34 L746,34 L746,46 L766,46 L766,62 L786,62 L786,78 L806,78 L806,60 L826,60 L826,42 L846,42 L846,26 L866,26 L866,14 L880,14 L880,26 L894,26 L894,42 L914,42 L914,60 L934,60 L934,76 L952,76 L952,58 L972,58 L972,42 L992,42 L992,30 L1012,30 L1012,42 L1032,42 L1032,58 L1052,58 L1052,74 L1070,74 L1070,56 L1090,56 L1090,40 L1110,40 L1110,28 L1130,28 L1130,40 L1150,40 L1150,56 L1170,56 L1170,72 L1190,72 L1190,56 L1210,56 L1210,42 L1230,42 L1230,30 L1250,30 L1250,42 L1270,42 L1270,56 L1290,56 L1290,72 L1310,72 L1310,86 L1330,86 L1330,98 L1340,98 L1340,120 Z" fill="rgba(90,170,212,0.08)" stroke="rgba(90,170,212,0.14)" stroke-width=".8"/>
+  <rect x="150" y="7" width="6" height="5" fill="rgba(90,170,212,0.55)" rx="1" class="tw" style="--d:2.1s;--dl:0s"/>
+  <rect x="272" y="11" width="6" height="5" fill="rgba(90,170,212,0.55)" rx="1" class="tw" style="--d:2.4s;--dl:.3s"/>
+  <rect x="578" y="7" width="6" height="5" fill="rgba(90,170,212,0.48)" rx="1" class="tw" style="--d:1.9s;--dl:.8s"/>
+  <rect x="866" y="17" width="6" height="5" fill="rgba(90,170,212,0.55)" rx="1" class="tw" style="--d:2s;--dl:1s"/>
+  <rect x="1252" y="33" width="6" height="5" fill="rgba(90,170,212,0.55)" rx="1" class="tw" style="--d:1.8s;--dl:.9s"/>
+</svg>
+<div class="fin">
+  <div class="ftop">
+    <div>
+      <div style="margin-bottom:14px"><img src="logo.png" alt="الشموخ" style="height:100px;width:auto;object-fit:contain"/></div>
+      <p class="fab"><span class="ar">رؤية هندسية تتجاوز الحدود، ودقة ترسم المستقبل.</span><span class="en" style="display:none">An engineering vision beyond limits — precision that shapes the future.</span></p>
+      <div class="fci"><span class="fcl">Email</span><a href="mailto:admin@alshumukh.qa" class="fcv">admin@alshumukh.qa</a></div>
+      <div class="fci"><span class="fcl">Website</span><a href="https://al-shumukheng.com/" target="_blank" class="fcv">https://al-shumukheng.com</a></div>
+    </div>
+    <div class="fcol"><h4><span class="ar">خدماتنا</span><span class="en" style="display:none">Services</span></h4><ul>
+      <li><a href="design.html"><span class="ar">التصميم المعماري</span><span class="en" style="display:none">Architectural Design</span></a></li>
+      <li><a href="supervision.html"><span class="ar">الإشراف الهندسي</span><span class="en" style="display:none">Engineering Supervision</span></a></li>
+      <li><a href="services.html"><span class="ar">جميع الخدمات</span><span class="en" style="display:none">All Services</span></a></li>
+      <li><a href="portfolio.html"><span class="ar">أعمالنا</span><span class="en" style="display:none">Portfolio</span></a></li>
+    </ul></div>
+    <div class="fcol"><h4><span class="ar">الشركة</span><span class="en" style="display:none">Company</span></h4><ul>
+      <li><a href="about.html"><span class="ar">من نحن</span><span class="en" style="display:none">About Us</span></a></li>
+      <li><a href="why.html"><span class="ar">لماذا نحن</span><span class="en" style="display:none">Why Us</span></a></li>
+      <li><a href="faq.html"><span class="ar">الأسئلة الشائعة</span><span class="en" style="display:none">FAQ</span></a></li>
+      <li><a href="contact.html"><span class="ar">تواصل معنا</span><span class="en" style="display:none">Contact</span></a></li>
+    </ul></div>
+    <div class="fcol"><h4><span class="ar">تواصل</span><span class="en" style="display:none">Connect</span></h4><ul>
+      <li><a href="contact.html"><span class="ar">ابدأ مشروعك</span><span class="en" style="display:none">Start Your Project</span></a></li>
+      <li><a href="https://wa.me/+97466717222" target="_blank">WhatsApp</a></li>
+      <li><a href="https://al-shumukheng.com/" target="_blank"><span class="ar">الموقع الرسمي</span><span class="en" style="display:none">Official Website</span></a></li>
+    </ul></div>
+  </div>
+  <div class="fbtm">
+    <p class="fcp"><span class="ar">© 2026 الشموخ للاستشارات الهندسية — جميع الحقوق محفوظة</span><span class="en" style="display:none">© 2026 Al-Shumukh Engineering Consultancy — All Rights Reserved</span></p>
+    <div class="socs"><a href="#" class="soc">in</a><a href="#" class="soc">𝕏</a><a href="#" class="soc">📷</a><a href="https://wa.me/+97466717222" target="_blank" class="soc">💬</a></div>
+  </div>
+</div>
+</footer>
+<script>
+// mobile menu
+function tmob(){document.getElementById('mobn').classList.toggle('o');document.getElementById('hbg').classList.toggle('o');}
+function cmob(){document.getElementById('mobn').classList.remove('o');document.getElementById('hbg').classList.remove('o');}
+// scroll
+window.addEventListener('scroll',function(){
+  var p=(window.scrollY/(document.body.scrollHeight-window.innerHeight))*100;
+  document.getElementById('pgb').style.width=p+'%';
+  document.getElementById('btt').classList.toggle('sh',window.scrollY>400);
+  document.getElementById('hdr').style.boxShadow=window.scrollY>20?'0 4px 22px rgba(90,170,212,.14)':'none';
+});
+// reveal
+var _io=new IntersectionObserver(function(e){e.forEach(function(x){if(x.isIntersecting){x.target.classList.add('on');_io.unobserve(x.target);}});},{threshold:0.09});
+document.querySelectorAll('.rv').forEach(function(r){_io.observe(r);});
+// counters
+function _aC(el){var t=+el.dataset.target,s=t/1800*16,c=0;var tm=setInterval(function(){c=Math.min(c+s,t);el.textContent=Math.floor(c);if(c>=t){el.textContent=t;clearInterval(tm);}},16);}
+var _cio=new IntersectionObserver(function(e){e.forEach(function(x){if(x.isIntersecting){x.target.querySelectorAll('.count').forEach(_aC);_cio.unobserve(x.target);}});},{threshold:0.3});
+document.querySelectorAll('section').forEach(function(s){_cio.observe(s);});
+// faq
+function tfaq(btn){var i=btn.closest('.fqi'),w=i.classList.contains('op');document.querySelectorAll('.fqi').forEach(function(x){x.classList.remove('op');});if(!w)i.classList.add('op');}
+// portfolio filter
+function flt(btn,cat){document.querySelectorAll('.ftab').forEach(function(b){b.classList.remove('on');});btn.classList.add('on');document.querySelectorAll('#pgrid .pc').forEach(function(c){c.style.display=(cat==='all'||c.dataset.cat===cat)?'':'none';});}
+// gallery
+function showGal(idx,total){
+  for(var i=0;i<total;i++){
+    var v=document.getElementById('gv'+i); if(v)v.style.display=i===idx?'block':'none';
+    var th=document.getElementById('gt'+i); if(th)th.classList.toggle('on',i===idx);
+  }
+}
+// language switch
+function setL(l){
+  var isEn=l==='en';
+  document.documentElement.classList.toggle('ltr',isEn);
+  document.getElementById('ba').classList.toggle('a',!isEn);
+  document.getElementById('be').classList.toggle('a',isEn);
+  try{localStorage.setItem('sh_lang',l);}catch(e){}
+}
+// restore language
+(function(){try{var l=localStorage.getItem('sh_lang');if(l==='en')setL('en');}catch(e){}})();
+// nav active
+function setActive(href){document.querySelectorAll('.nul a').forEach(function(a){a.classList.toggle('act',a.getAttribute('href')===href);});}
+setActive('services.html');
+
+// Copy Phone Number
+function copyPhone(){
+  var num = '+97466717222';
+  if(navigator.clipboard){
+    navigator.clipboard.writeText(num);
+  } else {
+    var ta = document.createElement('textarea');
+    ta.value = num; document.body.appendChild(ta);
+    ta.select(); document.execCommand('copy');
+    document.body.removeChild(ta);
+  }
+  var toast = document.getElementById('toast');
+  if(toast){
+    toast.style.opacity = '1'; toast.style.transform = 'translateY(0)';
+    setTimeout(function(){
+      toast.style.opacity = '0'; toast.style.transform = 'translateY(10px)';
+    }, 2000);
+  }
+}</script>
+
+</body></html>
